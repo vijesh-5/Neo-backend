@@ -74,7 +74,7 @@ const updatePost = async (req , res) => {
             return res.status(400).json({message:"Incomplete data !!"});
         }
         const post = await Post.findByIdAndUpdate(
-            req.params.id , req.bosy , {new : true}
+            req.params.id , req.body , {new : true}
         );
 
         if (!post){

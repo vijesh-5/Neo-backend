@@ -120,5 +120,56 @@ const logoutUser = async (req , res) => {
     }
 }
 
+const deleteUser = async (req , res) => {
+  try{
+    const user = await User.findByIdAndDelete(req.params.id);
+    if(! user) return res.status(400).json({message : "User not found "});
+    return res.status(200).json({messade : "Successfully deleted user " , user});
+  }catch (error){
+    res.status(500).json({message : "Internal Servar Error " , error : error.message});
+  }
+}
 
-export { registerUser , loginUser , logoutUser};
+const updateUser = async (req , res) => {
+  try{
+
+    if(Object.keys(req.body).length === 0) return res.status(400).json({message : "Impropper or incomplete input"});
+
+    const user = await User.findByIdAndUpdate(
+      req.params.id , req.body , {new : true} 
+    );
+
+    if(!user){
+      return res.status(400).json({message : "User not found !! "});
+    }
+
+    return res.status(200).json({
+      message : "Successfully updated the user",
+      user
+    });
+
+  }catch (error){
+    res.status(500).json({message : "Internal Servar Error " , error : error.message})
+  }
+}
+
+
+const getUserdetails = async (req , res) => {
+  try{
+    const username = req.params.username;
+  if (!username) return res.status(400).json({message : "Impropper or incomplete input"});
+
+  const user = await User.findOne({username:username});
+
+  if(!user) return res.status(400).json({message : "User not sound"});
+
+    return res.status(200).json({
+      message : "User found : ",
+      user
+    });
+  } catch (error) {
+    res.status(500).json({message : "Internal Server Error " , error : error.message});
+  }
+}
+
+export { registerUser , loginUser , logoutUser , deleteUser , updateUser , getUserdetails};
