@@ -1,0 +1,20 @@
+{
+  "name": "intro-example",
+  "version": "1.0.0",
+  "description": "\" a simple DIY project to improve my knowledge \"",
+  "license": "ISC",
+  "author": "Vijesh",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "mongoose": "^8.23.0",
+    "nodemon": "^3.1.11"
+  }
+}
